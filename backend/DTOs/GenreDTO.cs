@@ -9,6 +9,7 @@ public class GenreDTO : BaseDTO<Genre>
 
     public override void UpdateModel(Genre model)
     {
-        throw new NotImplementedException();
+        model.GenreName = GenreName;
+        model.Description = Description;
     }
 }

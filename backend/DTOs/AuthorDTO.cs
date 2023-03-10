@@ -11,6 +11,9 @@ public class AuthorDTO : BaseDTO<Author>
 
     public override void UpdateModel(Author model)
     {
-        throw new NotImplementedException();
+        model.FirstName = FirstName;
+        model.LastName = LastName;
+        model.Books = Books;
+        model.Biography = Biography;
     }
 }

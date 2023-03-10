@@ -10,6 +10,9 @@ public class AddressDTO : BaseDTO<Address>
     public string? Country { get; set; } = "Finland";
     public override void UpdateModel(Address model)
     {
-        throw new NotImplementedException();
+        model.StreetAddress = StreetAddress;
+        model.Zip = Zip;
+        model.City = City;
+        model.Country = Country;
     }
 }

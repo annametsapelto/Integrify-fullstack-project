@@ -8,6 +8,7 @@ public class OrderDTO : BaseDTO<Order>
     public decimal Total { get; set; }
     public override void UpdateModel(Order model)
     {
-        throw new NotImplementedException();
+        model.Items = Items;
+        model.Total = Total;
     }
 }

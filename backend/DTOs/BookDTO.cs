@@ -15,6 +15,14 @@ public class BookDTO : BaseDTO<Book>
     public int StorageTotal { get; set; }
     public override void UpdateModel(Book model)
     {
-        throw new NotImplementedException();
+        model.Title = Title;
+        model.Authors = Authors;
+        model.Genre = Genre;
+        model.SubGenre = SubGenre;
+        model.Publisher = Publisher;
+        model.PublishingYear = PublishingYear;
+        model.PageCount = PageCount;
+        model.Price = Price;
+        model.StorageTotal = StorageTotal;
     }
 }

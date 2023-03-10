@@ -14,6 +14,12 @@ public class UserDTO : BaseDTO<User>
 
     public override void UpdateModel(User model)
     {
-        throw new NotImplementedException();
+        model.FirstName = FirstName;
+        model.LastName = LastName;
+        model.Email = Email;
+        model.Password = Password;
+        model.Address = Address;
+        model.Orders = Orders;
+        model.Role = Role;
     }
 }
