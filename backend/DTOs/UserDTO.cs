@@ -10,7 +10,7 @@ public class UserDTO : BaseDTO<User>
     public string Password { get; set; } = null!;
     public Address? Address { get; set; }
     public IList<Order>? Orders { get; set; }
-    public Role Role { get; set; } = Role.Customer;
+    public User.UserRole Role { get; set; }
 
     public override void UpdateModel(User model)
     {

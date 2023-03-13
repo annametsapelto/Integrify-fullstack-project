@@ -8,11 +8,13 @@ public class User : BaseModel
     public string Password { get; set; } = null!;
     public Address? Address { get; set; }
     public IList<Order>? Orders { get; set; }
-    public Role Role { get; set; } = Role.Customer;
-}
+    public UserRole Role { get; set; } = UserRole.Customer;
 
-public enum Role
+  public enum UserRole
 {
     Customer,
     Admin
+}
+
+
 }
