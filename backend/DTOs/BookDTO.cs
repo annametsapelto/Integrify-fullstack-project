@@ -1,9 +1,11 @@
 namespace DTOs;
 
+using System.ComponentModel.DataAnnotations;
 using Models;
 
 public class BookDTO : BaseDTO<Book>
 {
+    [MinLength(2)]
     public string Title { get; set; } = null!;
     public IList<Author> Authors { get; set; } = null!;
     public Genre Genre { get; set; } = null!;

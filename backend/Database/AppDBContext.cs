@@ -33,4 +33,11 @@ public class AppDbContext : DbContext
     {
         modelBuilder.HasPostgresEnum<User.UserRole>();
     }
+
+    public DbSet<Book> Books { get; set; } = null!;
+    public DbSet<Author> Authors { get; set; } = null!;
+    public DbSet<Address> Addresses { get; set; } = null!;
+    public DbSet<Genre> Genres { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
 }
