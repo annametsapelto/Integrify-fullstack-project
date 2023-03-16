@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Database;
 
-public class BookService : DbCrudService<Author, AuthorDTO>, IAuthorService
+public class BookService : DbCrudService<Book, BookDTO>, IBookService
 {
     public BookService(AppDbContext dbContext) : base(dbContext)
     {
