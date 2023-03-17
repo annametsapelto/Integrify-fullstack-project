@@ -59,9 +59,9 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
         return NotFound("Item is not found");
     }
 
-    [HttpGet]
-    public async Task<ICollection<TModel>> GetAll()
+    [HttpGet()]
+    public async Task<ICollection<TModel>> GetAll([FromQuery] QueryOptions options)
     {
-        return await _service.GetAllAsync();
+        return await _service.GetAllAsync(options);
     }
 }
