@@ -8,6 +8,7 @@ public class Book : BaseModel
     public Genre? SubGenre { get; set; }
     public string? Publisher { get; set; }
     public int PublishingYear { get; set; }
+    public string ImageUrl { get; set; } = "";
     public int PageCount { get; set; }
     public decimal Price { get; set; }
     public int StorageTotal { get; set; }

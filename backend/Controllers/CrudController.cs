@@ -16,7 +16,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
-    [HttpPost]
+    [HttpPost()]
     public async virtual Task<IActionResult> Create(TDto request)
     {
         var item = await _service.CreateAsync(request);
@@ -27,7 +27,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
         return Ok(item);
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id}")]
     public async virtual Task<ActionResult<TModel?>> Get(int id)
     {
         var item = await _service.GetAsync(id);
@@ -38,7 +38,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
         return item;
     }
 
-    [HttpPut("{id:int}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult<TModel?>> Update(int id, TDto request)
     {
         var item = await _service.UpdateAsync(id, request);
