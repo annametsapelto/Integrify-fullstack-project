@@ -35,7 +35,7 @@ public abstract class CrudController<TModel, TCreateDTO, TReadDTO, TUpdateDTO> :
         {
             return NotFound("Item is not found");
         }
-        return item;
+        return Ok(item);
     }
 
     [HttpPut("{id}")]
@@ -60,8 +60,8 @@ public abstract class CrudController<TModel, TCreateDTO, TReadDTO, TUpdateDTO> :
     }
 
     [HttpGet()]
-    public async Task<ICollection<TReadDTO>> GetAll([FromQuery] QueryOptions options)
+    public async Task<ActionResult<ICollection<TReadDTO>>> GetAll([FromQuery] QueryOptions options)
     {
-        return await _service.GetAllAsync(options);
+        return Ok(await _service.GetAllAsync(options));
     }
 }

@@ -9,7 +9,7 @@ using Repositories;
 public class BookService : DbCrudService<Book, BookCreateDTO, BookReadDTO, BookUpdateDTO>, IBookService
 {
 
-public BookService(IMapper mapper, BookRepository repo) : base(mapper, repo)
+public BookService(IMapper mapper, IBookRepository repo) : base(mapper, repo)
     {
     }
 }

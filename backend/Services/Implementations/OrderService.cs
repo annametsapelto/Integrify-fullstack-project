@@ -9,7 +9,7 @@ using Repositories;
 
 public class OrderService : DbCrudService<Order, OrderCreateDTO, OrderReadDTO, OrderUpdateDTO>, IOrderService
 {
-    public OrderService(IMapper mapper, OrderRepository repo) : base(mapper, repo)
+    public OrderService(IMapper mapper, IOrderRepository repo) : base(mapper, repo)
     {
     }
 }

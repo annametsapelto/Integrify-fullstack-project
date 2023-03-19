@@ -9,7 +9,7 @@ using Repositories;
 
 public class GenreService : DbCrudService<Genre, GenreCreateDTO, GenreReadDTO, GenreUpdateDTO>, IGenreService
 {
-    public GenreService(IMapper mapper, GenreRepository repo) : base(mapper, repo)
+    public GenreService(IMapper mapper, IGenreRepository repo) : base(mapper, repo)
     {
     }
 }

@@ -8,7 +8,7 @@ using Repositories;
 
 public class AuthorService : DbCrudService<Author, AuthorCreateDTO, AuthorReadDTO, AuthorUpdateDTO>, IAuthorService
 {
-    public AuthorService(IMapper mapper, AuthorRepository repo) : base(mapper, repo)
+    public AuthorService(IMapper mapper, IAuthorRepository repo) : base(mapper, repo)
     {
     }
 }
