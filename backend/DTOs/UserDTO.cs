@@ -2,24 +2,23 @@ namespace DTOs;
 
 using Models;
 
-public class UserDTO : BaseDTO<User>
+public class UserBaseDTO
 {
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public string Password { get; set; } = null!;
-    public Address? Address { get; set; }
+    public string Email { get; set; } = null!; 
     public IList<Order>? Orders { get; set; }
-    public User.UserRole Role { get; set; }
+}
+public class UserReadDTO : UserBaseDTO
+{
+}
 
-    public override void UpdateModel(User model)
-    {
-        model.FirstName = FirstName;
-        model.LastName = LastName;
-        model.Email = Email;
-        model.Password = Password;
-        model.Address = Address;
-        model.Orders = Orders;
-        model.Role = Role;
-    }
+public class UserCreateDTO : UserBaseDTO
+{
+    public string Password { get; set; } = null!;
+}
+
+public class UserUpdateDTO : UserBaseDTO
+{
+    public string Password { get; set; } = null!;
 }

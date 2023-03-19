@@ -2,14 +2,20 @@ namespace DTOs;
 
 using Models;
 
-public class GenreDTO : BaseDTO<Genre>
+public class BaseGenreDTO
 {
     public string GenreName { get; set; } = null!;
     public string? Description { get; set; }
+}
 
-    public override void UpdateModel(Genre model)
-    {
-        model.GenreName = GenreName;
-        model.Description = Description;
-    }
+public class GenreCreateDTO
+{
+}
+
+public class GenreReadDTO
+{
+}
+
+public class GenreUpdateDTO
+{
 }

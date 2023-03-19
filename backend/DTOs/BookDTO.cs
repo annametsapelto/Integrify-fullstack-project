@@ -3,7 +3,7 @@ namespace DTOs;
 using System.ComponentModel.DataAnnotations;
 using Models;
 
-public class BookDTO : BaseDTO<Book>
+public class BaseBookDTO
 {
     [MinLength(2)]
     public string Title { get; set; } = null!;
@@ -15,16 +15,13 @@ public class BookDTO : BaseDTO<Book>
     public int PageCount { get; set; }
     public decimal Price { get; set; }
     public int StorageTotal { get; set; }
-    public override void UpdateModel(Book model)
-    {
-        model.Title = Title;
-        model.Authors = Authors;
-        model.Genre = Genre;
-        model.SubGenre = SubGenre;
-        model.Publisher = Publisher;
-        model.PublishingYear = PublishingYear;
-        model.PageCount = PageCount;
-        model.Price = Price;
-        model.StorageTotal = StorageTotal;
-    }
 }
+
+public class BookCreateDTO : BaseBookDTO
+{}
+
+public class BookReadDTO : BaseBookDTO
+{}
+
+public class BookUpdateDTO : BaseBookDTO
+{}

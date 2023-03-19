@@ -3,11 +3,12 @@ namespace Services;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
-using Database;
+using AutoMapper;
+using Repositories;
 
-public class AuthorService : DbCrudService<Author, AuthorDTO>, IAuthorService
+public class AuthorService : DbCrudService<Author, AuthorCreateDTO, AuthorReadDTO, AuthorUpdateDTO>, IAuthorService
 {
-    public AuthorService(AppDbContext dbContext) : base(dbContext)
+    public AuthorService(IMapper mapper, AuthorRepository repo) : base(mapper, repo)
     {
     }
 }

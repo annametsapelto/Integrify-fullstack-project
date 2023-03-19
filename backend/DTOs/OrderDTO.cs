@@ -2,15 +2,18 @@ namespace DTOs;
 
 using Models;
 
-public class OrderDTO : BaseDTO<Order>
+public class BaseOrderDTO
 {
     public IList<Book> Items {get; set; } = null!;
     public decimal Total { get; set; }
     public User Orderer { get; set; } = null!;
-    public override void UpdateModel(Order model)
-    {
-        model.Items = Items;
-        model.Total = Total;
-        model.Orderer = Orderer;
-    }
 }
+
+public class OrderCreateDTO
+{}
+
+public class OrderReadDTO
+{}
+
+public class OrderUpdateDTO
+{}

@@ -3,11 +3,13 @@ namespace Services;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
-using Database;
+using AutoMapper;
+using Repositories;
 
-public class BookService : DbCrudService<Book, BookDTO>, IBookService
+public class BookService : DbCrudService<Book, BookCreateDTO, BookReadDTO, BookUpdateDTO>, IBookService
 {
-    public BookService(AppDbContext dbContext) : base(dbContext)
+
+public BookService(IMapper mapper, BookRepository repo) : base(mapper, repo)
     {
     }
 }

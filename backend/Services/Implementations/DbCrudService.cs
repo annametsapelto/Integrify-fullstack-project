@@ -4,70 +4,67 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Models;
-using DTOs;
-using Database;
+using Repositories;
+using AutoMapper;
 
-public class DbCrudService<TModel, TDto> : ICrudService<TModel, TDto>
+public class DbCrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> 
+    : ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO>
     where TModel : BaseModel, new()
-    where TDto : BaseDTO<TModel>
 {
-    protected readonly AppDbContext _dbContext;
+    protected readonly IMapper _mapper;
+    protected readonly IBaseRepository<TModel> _repo;
 
-    public DbCrudService(AppDbContext dbContext)
+    public DbCrudService(IMapper mapper, IBaseRepository<TModel> repo)
     {
-        _dbContext = dbContext;
+        _mapper = mapper;
+        _repo = repo;
     }
-
-    public async Task<TModel?> CreateAsync(TDto request)
+    public async Task<TReadDTO?> CreateAsync(TCreateDTO request)
     {
-        var item = new TModel();
-        request.UpdateModel(item);
-        _dbContext.Add(item);
-        await _dbContext.SaveChangesAsync(); // Tell the db context to update the database
-        return item;
+        var entity = _mapper.Map<TCreateDTO, TModel>(request);
+        var result = await _repo.CreateAsync(entity);
+        if (result is null)
+        {
+            throw new Exception("Creation failed.");
+        }
+        return _mapper.Map<TModel, TReadDTO>(result);
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var item = await GetAsync(id);
-        if (item is null)
+        var data = await _repo.GetAsync(id);
+        if (data is null)
         {
             return false;
         }
-        _dbContext.Remove(item);
-        await _dbContext.SaveChangesAsync();
+        await _repo.DeleteAsync(id);
         return true;
     }
 
-    public virtual async Task<ICollection<TModel>> GetAllAsync(QueryOptions options)
+    public async Task<ICollection<TReadDTO>> GetAllAsync(QueryOptions options)
     {
-        var query = _dbContext.Set<TModel>().AsNoTracking();
-        if (options.Sort.Trim().Length > 0)
-        {
-            if (query.GetType().GetProperty(options.Sort) != null)
-            {
-                query.OrderBy(e => e.GetType().GetProperty(options.Sort));
-            }
-            query.Take(options.Limit).Skip(options.Skip);
-        }
-        return await query.ToListAsync();
+        var data = await _repo.GetAllAsync(options);
+        return _mapper.Map<ICollection<TModel>, ICollection<TReadDTO>>(data);
     }
 
-    public virtual async Task<TModel?> GetAsync(int id)
+    public async Task<TReadDTO?> GetAsync(int id)
     {
-        
-        return await _dbContext.Set<TModel>().FindAsync(id);
+        var data = await _repo.GetAsync(id);
+        if (data is null)
+        {
+            throw new Exception("Id not found.");
+        }
+        return _mapper.Map<TModel, TReadDTO>(data);
     }
 
-    public async Task<TModel?> UpdateAsync(int id, TDto request)
+    public async Task<TReadDTO?> UpdateAsync(int id, TUpdateDTO request)
     {
-        var item = await GetAsync(id);
-        if (item is null)
+        var data = await _repo.GetAsync(id);
+        if (data is null)
         {
-            return null;
+            throw new Exception("Id not found.");
         }
-        request.UpdateModel(item);
-        await _dbContext.SaveChangesAsync();
-        return item;
+        var result = await _repo.UpdateAsync(id, _mapper.Map<TUpdateDTO, TModel>(request));
+        return _mapper.Map<TModel, TReadDTO>(result);
     }
 }

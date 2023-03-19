@@ -3,11 +3,12 @@ namespace Services;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
-using Database;
+using AutoMapper;
+using Repositories;
 
-public class UserService : DbCrudService<User, UserDTO>, IUserService
+public class UserService : DbCrudService<User, UserCreateDTO, UserReadDTO, UserUpdateDTO>, IUserService
 {
-    public UserService(AppDbContext dbContext) : base(dbContext)
+    public UserService(IMapper mapper, UserRepository repo) : base(mapper, repo)
     {
     }
 }

@@ -4,20 +4,20 @@ using Services;
 using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Repositories;
 
-public abstract class CrudController<TModel, TDto> : BaseApiController
+public abstract class CrudController<TModel, TCreateDTO, TReadDTO, TUpdateDTO> : BaseApiController
     where TModel : BaseModel
-    where TDto : BaseDTO<TModel>
 {
-    private readonly ICrudService<TModel, TDto> _service;
+    private readonly ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> _service;
 
-    public CrudController(ICrudService<TModel, TDto> service)
+    public CrudController(ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> service)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
     [HttpPost()]
-    public async virtual Task<IActionResult> Create(TDto request)
+    public async virtual Task<IActionResult> Create(TCreateDTO request)
     {
         var item = await _service.CreateAsync(request);
         if (item is null)
@@ -28,7 +28,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
     }
 
     [HttpGet("{id}")]
-    public async virtual Task<ActionResult<TModel?>> Get(int id)
+    public async virtual Task<ActionResult<TReadDTO?>> Get([FromRoute] int id)
     {
         var item = await _service.GetAsync(id);
         if (item is null)
@@ -39,7 +39,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<TModel?>> Update(int id, TDto request)
+    public async Task<ActionResult<TModel?>> Update(int id, TUpdateDTO request)
     {
         var item = await _service.UpdateAsync(id, request);
         if (item is null)
@@ -60,7 +60,7 @@ public abstract class CrudController<TModel, TDto> : BaseApiController
     }
 
     [HttpGet()]
-    public async Task<ICollection<TModel>> GetAll([FromQuery] QueryOptions options)
+    public async Task<ICollection<TReadDTO>> GetAll([FromQuery] QueryOptions options)
     {
         return await _service.GetAllAsync(options);
     }

@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
 using Database;
+using AutoMapper;
+using Repositories;
 
-public class OrderService : DbCrudService<Order, OrderDTO>, IOrderService
+public class OrderService : DbCrudService<Order, OrderCreateDTO, OrderReadDTO, OrderUpdateDTO>, IOrderService
 {
-    public OrderService(AppDbContext dbContext) : base(dbContext)
+    public OrderService(IMapper mapper, OrderRepository repo) : base(mapper, repo)
     {
     }
 }

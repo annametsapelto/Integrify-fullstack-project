@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-public class AuthorController : CrudController<Author, AuthorDTO>
+public class AuthorController : CrudController<Author, AuthorCreateDTO, AuthorReadDTO, AuthorUpdateDTO>
 {
     private readonly IAuthorService _service;
 

@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-public class BookController : CrudController<Book, BookDTO>
+public class BookController : CrudController<Book, BookCreateDTO, BookReadDTO, BookUpdateDTO>
 {
     private readonly IBookService _service;
 

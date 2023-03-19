@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-public class UserController : CrudController<User, UserDTO>
+public class UserController : CrudController<User, UserCreateDTO, UserReadDTO, UserUpdateDTO>
 {
     private readonly IUserService _service;
 

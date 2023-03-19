@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-public class OrderController : CrudController<Order, OrderDTO>
+public class OrderController : CrudController<Order, OrderCreateDTO, OrderReadDTO, OrderUpdateDTO>
 {
     private readonly IOrderService _service;
 

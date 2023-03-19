@@ -5,7 +5,7 @@ using Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-public class GenreController : CrudController<Genre, GenreDTO>
+public class GenreController : CrudController<Genre, GenreCreateDTO, GenreReadDTO, GenreUpdateDTO>
 {
     private readonly IGenreService _service;
 

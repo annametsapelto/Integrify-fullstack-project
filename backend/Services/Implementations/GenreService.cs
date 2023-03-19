@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using DTOs;
 using Database;
+using AutoMapper;
+using Repositories;
 
-public class GenreService : DbCrudService<Genre, GenreDTO>, IGenreService
+public class GenreService : DbCrudService<Genre, GenreCreateDTO, GenreReadDTO, GenreUpdateDTO>, IGenreService
 {
-    public GenreService(AppDbContext dbContext) : base(dbContext)
+    public GenreService(IMapper mapper, GenreRepository repo) : base(mapper, repo)
     {
     }
 }
