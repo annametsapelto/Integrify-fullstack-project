@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using Repositories;
 using AutoMapper;
+using backend.Helpers;
 
 public class DbCrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> 
     : ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO>
@@ -25,7 +26,7 @@ public class DbCrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO>
         var result = await _repo.CreateAsync(entity);
         if (result is null)
         {
-            throw new Exception("Creation failed.");
+            throw new Exception("Could not create the user.");
         }
         return _mapper.Map<TModel, TReadDTO>(result);
     }

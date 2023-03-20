@@ -22,3 +22,4 @@ public class UserUpdateDTO : UserBaseDTO
 {
     public string Password { get; set; } = null!;
 }
+
