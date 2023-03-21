@@ -10,7 +10,7 @@ using backend.Helpers;
 
 public class DbCrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> 
     : ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO>
-    where TModel : BaseModel, new()
+    where TModel : class
 {
     protected readonly IMapper _mapper;
     protected readonly IBaseRepository<TModel> _repo;

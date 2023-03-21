@@ -3,8 +3,10 @@ namespace Database;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Npgsql;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityUserContext<User, int>
 {
     // Static constructor which will be run ONCE
     static AppDbContext()
@@ -26,6 +28,7 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        base.OnConfiguring(optionsBuilder);
         var connString = _config.GetConnectionString("DefaultConnection");
         optionsBuilder
             .UseNpgsql(connString)

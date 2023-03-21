@@ -4,7 +4,7 @@ using Database;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : BaseModel
+public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : class
 {
     protected readonly AppDbContext _dbContext;
     public BaseRepository(AppDbContext dbContext)

@@ -1,6 +1,8 @@
 using Database;
 using Services;
 using Repositories;
+using Microsoft.AspNetCore.Identity;
+using Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>()
+.AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
@@ -24,6 +28,10 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 });
 var app = builder.Build();
 

@@ -2,7 +2,7 @@ namespace Repositories;
 
 using Models;
 
-public interface IBaseRepository<TModel> where TModel : BaseModel
+public interface IBaseRepository<TModel>
 {
      Task<TModel?> CreateAsync(TModel model);
     Task<TModel?> GetAsync(int id);

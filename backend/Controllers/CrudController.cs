@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories;
 
 public abstract class CrudController<TModel, TCreateDTO, TReadDTO, TUpdateDTO> : BaseApiController
-    where TModel : BaseModel
+    where TModel : class
 {
     private readonly ICrudService<TModel, TCreateDTO, TReadDTO, TUpdateDTO> _service;
 
