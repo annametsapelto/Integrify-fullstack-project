@@ -6,9 +6,16 @@ using Npgsql;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-public class AppDbContext : IdentityUserContext<User, int>
+public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
 {
-    // Static constructor which will be run ONCE
+    
+    public DbSet<Book> Books { get; set; } = null!;
+    public DbSet<Author> Authors { get; set; } = null!;
+    public DbSet<Genre> Genres { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
+    private readonly IConfiguration _config;
+    
     static AppDbContext()
     {
 
@@ -16,15 +23,9 @@ public class AppDbContext : IdentityUserContext<User, int>
         // Recommendation from Postgres: Don't use time zone in database
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         NpgsqlConnection.GlobalTypeMapper.MapEnum<User.UserRole>();
-    }
-    public DbSet<Book> Books { get; set; } = null!;
-    public DbSet<Author> Authors { get; set; } = null!;
-    public DbSet<Genre> Genres { get; set; } = null!;
-    public DbSet<Order> Orders { get; set; } = null!;
-    public DbSet<User> Users { get; set; } = null!;
-    private readonly IConfiguration _config;
+    }    
 
-    public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration config) : base(options) => _config = config;
+public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration config) : base(options) => _config = config;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -56,6 +57,9 @@ public class AppDbContext : IdentityUserContext<User, int>
             .HasForeignKey(entity => entity.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
         });
+        modelBuilder.AddIdentityConfig();
+
+        base.OnModelCreating(modelBuilder);
     }
 
 
