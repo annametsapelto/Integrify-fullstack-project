@@ -1,4 +1,10 @@
-# Fullstack Project
+# Forestfield's Books - Fullstack Project
+
+## Introduction
+
+This project is a full stack project about an online book store. It consists of a backend made with ASP.NET Core using PostgreSQL database and a frontend made with React.js and TypeScript. Any user is able to see books by category and by author and add them into their shopping cart, change their amount or remove them from cart. They can create an account and after logging in see their own information and order history. An admin user is able to create, modify and delete books, authors, genres, orders and users.
+
+## Technologies
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![SASS](https://img.shields.io/badge/SASS-v.4-hotpink)
@@ -10,28 +16,69 @@
 
 * Frontend: SASS, TypeScript, React, Redux Toolkit
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
+## Project structure
 
-You can follow the same topics as your backend project. It is also possible to select a different topic
+This project consists of two parts, the backend and the frontend.
 
-## Setting Up for folder `Backend`
+The structure for the backend is following:
 
-1. Create `appsettings.json` (and `appsettings.*.json` if needed) file in the root of folder `Backend`. You can refer to the content of file `example.json`
-2. Install all the needed packages:
+├───bin
+│   └───Debug
+│       ├───net6.0
+│       └───net7.0
+├───Controllers
+├───Database
+├───DTOs
+├───Helpers
+├───Migrations
+├───Models
+├───obj
+│   └───Debug
+│       ├───net.6.0.401
+│       │   ├───ref
+│       │   ├───refint
+│       │   └───staticwebassets
+│       ├───net6.0
+│       │   ├───ref
+│       │   ├───refint
+│       │   └───staticwebassets
+│       └───net7.0
+│           ├───ref
+│           ├───refint
+│           └───staticwebassets
+├───Properties
+├───Repositories
+│   ├───AuthorRepository
+│   ├───BaseRepository
+│   ├───BookRepository
+│   ├───GenreRepository
+│   ├───OrderRepository
+│   └───UserRepository
+└───Services
+    └───Implementations
+
+The structure for the frontend is following:
+
+├───public
+└───src
+    ├───components
+    ├───pages
+    ├───redux
+    └───styles
+
+
+## Getting started
+
+1. This repository can be cloned with Git using command ```git clone```
+2. To set up back end, first create `appsettings.json` (and `appsettings.*.json` if needed) file in the root of folder `Backend`. You can refer to the content of file `example.json`. There replace the connection string with your own database connection information.
+3. Install needed packages in terminal in backend folder from https://www.nuget.org/. See that the versions match the ASP.NEt Core version in use. From The following are needed:
     * AutoMapper
     * AutoMapper.Extensions.Microsoft.DependencyInjection
     * Microsoft.EntityFrameworkCore
     * Microsoft.EntityFrameworkCore.Design
     * Npgsql.EntityFrameworkCore.PostgreSQL
-    \
-   *You can add more packages when necessary.*
-3. You can change .NET Core version to be compatible with your local machine
+4. Run the application your preferred method.
+5. In frontend folder run command ```npm install``` to install the dependencies.
+6. Run the frontend with command ```npm start```.
 
-## Requirements
 
-Below are the steps that you need to finish in order to finish this module
-
-1. Your full stack project should have one git repo to manage both frontend and backend. The shared .git in the root directory is used to push commits to the remote repo. In case you need to deploy frontend and backend to different server, you can inittiate another `.git` folder in each repository. Syntax: `cd frontend` -> `git init` (similar to backend folder). Remember to add `.gitignore` for each folder when you intiate `git` repo.
-2. `frontend` folder is for the react frontend. Start with `backend` first before moving on to `frontend`.
-3. `backend` should have proper file structure, naming convention, and comply with Rest API.
-4. Each topic would have different features. However, the main routes should have CRUD operations, authentication and authorization.
-5. You need to deploy the fullstack project, rewrite `README.md` as instructed earlier in the course.

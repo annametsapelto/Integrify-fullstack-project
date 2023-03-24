@@ -39,6 +39,7 @@ public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration confi
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.HasPostgresEnum<User.UserRole>();
         modelBuilder.Entity<User>(entity => 
         {
@@ -59,7 +60,7 @@ public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration confi
         });
         modelBuilder.AddIdentityConfig();
 
-        base.OnModelCreating(modelBuilder);
+        
     }
 
 

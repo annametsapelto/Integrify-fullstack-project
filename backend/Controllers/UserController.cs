@@ -13,4 +13,15 @@ public class UserController : CrudController<User, UserCreateDTO, UserReadDTO, U
     {
         _service = service;
     }
+
+[HttpPost("/signup")]
+    public async Task<IActionResult> SignUpAsync(UserSignUpDTO request)
+    {
+        var user = await _service.SignUpAsync(request);
+        if (user is null)
+        {
+            return BadRequest();
+        }
+        return Ok(user);
+    }
 }
